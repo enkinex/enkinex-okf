@@ -1,3 +1,5 @@
+[![Enkinex — Semantic & Governance as Code](docs/images/enkinex-github-banner.png)](https://enkinex.org)
+
 # Enkinex OKF — Open Knowledge Format (OKF) as Code Library
 
 [![Standard](https://img.shields.io/badge/OKF-v0.1-blue)](https://github.com/bitol-io/open-data-contract-standard/tree/v3.1.0)
