@@ -1,0 +1,7 @@
+type: Future Concept Type
+organization:
+  classification: internal
+sources:
+  - resource: all queries in BigQuery project X
+    vendor_signal: { score: 7, explanation: experimental }
+future_family: [one, { two: true }]

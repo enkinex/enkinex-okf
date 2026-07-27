@@ -1,0 +1,36 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  KCL_VERSION: "0.12.4"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install KCL
+        run: curl -fsSL https://kcl-lang.io/script/install-cli.sh | bash -s -- -v "${KCL_VERSION}"
+
+      - uses: extractions/setup-just@v2
+
+      - name: kcl mod update
+        run: just init
+
+      - name: Run checks
+        run: just check

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Upstream Open Knowledge Format
+    url: https://github.com/GoogleCloudPlatform/knowledge-catalog
+    about: File issues about the OKF specification itself (not this KCL library) here.
+  - name: Enkinex
+    url: https://enkinex.org
+    about: General questions about Enkinex and its projects.

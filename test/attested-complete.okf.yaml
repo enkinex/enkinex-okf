@@ -1,0 +1,13 @@
+type: Attested Computation
+title: Revenue
+runtime: bigquery
+parameters:
+  - { name: year, type: integer, required: true }
+executor:
+  resource: references/skills/run-on-bq.md
+  receipt: [job_id, executed_sql, result]
+  future_executor_option: true
+attester:
+  resource: references/attesters/revenue.py
+  sandbox: consumer
+generated: { by: human:author, at: "2026-07-24T12:00:00Z" }

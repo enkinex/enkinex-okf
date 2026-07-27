@@ -1,0 +1,2 @@
+type: Metric
+stale_after: "not-a-date"

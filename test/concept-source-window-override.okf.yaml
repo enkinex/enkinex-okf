@@ -1,0 +1,6 @@
+type: Dashboard
+usage_window: { from: "2026-07-01", to: "2026-07-24" }
+sources:
+  - resource: dashboard:revenue
+    usage_count: 42
+    usage_window: { from: "2026-07-20", to: "2026-07-24" }

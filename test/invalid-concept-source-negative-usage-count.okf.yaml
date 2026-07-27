@@ -1,0 +1,4 @@
+type: Metric
+sources:
+  - resource: dashboard:revenue
+    usage_count: -1
