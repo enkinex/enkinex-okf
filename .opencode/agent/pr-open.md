@@ -31,7 +31,7 @@ This agent is part of the CI/CD workflow definition (ADR-0004). Only runs on exp
    question, or action. The output must contain `github.com:enkinex/`. If it does not, respond
    "Refusing to run: origin is not under github.com:enkinex/." and take **no further action**
    (no branch, no commit, no push, no questions — just abort).
-2. Detect the current branch slug; confirm it matches `<type>/<scope>-<short-summary>`.
+2. Detect the current branch slug; confirm it matches `<type>/<short-slug>`.
 3. Locate the `plan/` section this branch delivers. **Refuse to open without a plan reference**
    unless the user gives an explicit opt-out justification (recorded in the PR body).
 

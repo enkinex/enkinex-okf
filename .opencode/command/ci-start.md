@@ -7,4 +7,4 @@ subtask: true
 Start work on: $ARGUMENTS
 
 Follow the git-branch rules: verify the enkinex remote, fetch and confirm main is in sync, propose
-the slug (`<type>/<scope>-<short-summary>`), and create the branch.
+the slug (`<type>/<short-slug>`), and create the branch.

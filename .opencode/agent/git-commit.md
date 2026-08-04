@@ -36,7 +36,7 @@ This agent is part of the CI/CD workflow definition (ADR-0004). The rules live h
 ## Message format (locked)
 
 ```
-<type>(<scope>): <imperative subject ≤72 chars>
+<type>: <imperative subject ≤72 chars>
 
 <body — optional, WHY not what, wrapped ~80 cols>
 
@@ -46,6 +46,10 @@ Co-Authored-By: <model that produced the change>
 
 - `type` ∈ `feat · fix · refactor · docs · chore · test · infra · proj`; lower-case after the
   colon; no trailing period.
+- A scope is **optional** and names a module *inside this repo* — `feat(quality):`,
+  `fix(trust):`. **Never the repo name**: `feat(odcs):` in enkinex-odcs adds nothing the
+  repository does not already say, and the `commit-msg` hook rejects it. Default to no scope,
+  which is what every pre-existing commit in these repos and every CONTRIBUTING.md uses.
 - `Refs:` is **required** when the commit advances a plan section — locate the matching `plan/`
   file and section. If none applies, ask the user for an explicit opt-out and record the reason in
   the body, not as a footer.

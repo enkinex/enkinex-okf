@@ -37,15 +37,17 @@ This agent is part of the CI/CD workflow definition (ADR-0004). The rules live h
 ## Slug grammar (locked)
 
 ```
-<type>/<scope>-<short-summary>
+<type>/<short-slug>
 ```
 
 - `type` ∈ `feat · fix · refactor · docs · chore · test · infra · proj` (`proj` reserved for
   plan/architecture/discovery edits).
-- `scope` — affected subsystem, kebab-case (e.g. `aiops`, `odcs`, `dab`, `website`).
-- `short-summary` — kebab-case, ≤6 words, imperative.
+- `short-slug` — kebab-case, ≤6 words, imperative; describes the change, not the repository.
+  Examples: `feat/output-port-retry-policy`, `chore/contributor-tooling`.
+- **Do not prefix the slug with the repo name.** The branch already lives in the repo; `odcs-` in
+  `enkinex-odcs` is noise.
 
-Ask the user for type/scope/summary if not given; propose one from the task description.
+Ask the user for type/summary if not given; propose one from the task description.
 
 ## Action
 
