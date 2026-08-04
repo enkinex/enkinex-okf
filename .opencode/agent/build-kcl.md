@@ -1,10 +1,9 @@
 ---
 description: Use for KCL library implementation work in enkinex repos (odcs, odps, databricks). Follows the module/docstring/check-rule standards and the just check gate. Mid tier.
-mode: subagent
+mode: all
 model: openrouter/moonshotai/kimi-k2
 permission:
   bash:
-    "*": "ask"
     "git status*": "allow"
     "git diff*": "allow"
     "git log*": "allow"

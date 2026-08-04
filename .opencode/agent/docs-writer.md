@@ -1,10 +1,9 @@
 ---
 description: Use for documentation work in enkinex repos — Docusaurus MDX pages, tutorials, READMEs, library docs. Keeps tutorials in sync with the KCL libraries. Mid tier.
-mode: subagent
+mode: all
 model: openrouter/moonshotai/kimi-k2
 permission:
   bash:
-    "*": "ask"
     "git status*": "allow"
     "git diff*": "allow"
     "git log*": "allow"

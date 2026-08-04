@@ -3,6 +3,8 @@
   "permission": {
     "bash": {
       "*": "deny",
+      "ls*": "allow",
+      "mkdir*": "allow",
       "git add *": "allow",
       "git commit*": "allow",
       "git checkout*": "allow",

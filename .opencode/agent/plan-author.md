@@ -1,10 +1,9 @@
 ---
 description: Use when authoring or updating an enkinex plan document (plan/v*.md or plan/<topic>/*.md) — phased implementation plans with acceptance criteria, risks, and done criteria. Frontier tier.
-mode: subagent
+mode: all
 model: openrouter/moonshotai/kimi-k3
 permission:
   bash:
-    "*": "deny"
     "git status*": "allow"
     "git log*": "allow"
     "git diff*": "allow"

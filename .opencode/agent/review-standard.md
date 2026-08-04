@@ -1,10 +1,9 @@
 ---
 description: Use for schema-vs-standard review of enkinex KCL libraries — verifies KCL schemas against the source standard (ODCS/ODPS JSON schema, Databricks bundle reference) with the locked review rules. Frontier tier. Writes review plans only.
-mode: subagent
+mode: all
 model: openrouter/moonshotai/kimi-k3
 permission:
   bash:
-    "*": "deny"
     "git status*": "allow"
     "git diff*": "allow"
     "git log*": "allow"

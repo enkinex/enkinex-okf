@@ -1,6 +1,6 @@
 ---
 description: Use for read-only codebase research across an enkinex repo — mapping modules, finding definitions, summarising structure, extracting inventories from reference docs. Free tier. Never modifies anything.
-mode: subagent
+mode: all
 model: openrouter/nvidia/nemotron-3-nano-30b-a3b:free
 tools:
   write: false
