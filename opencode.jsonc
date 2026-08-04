@@ -27,6 +27,44 @@
   // one file governs all three harnesses instead of an opencode-only config
   // indirection.
 
+  // ── Language servers (loop.md Phase 3) ──────────────────────────────────
+  // An `lsp` object enables the built-ins AND applies these overrides, so the
+  // website keeps its TS/TSX server. KCL lives in the shared baseline rather
+  // than per-repo overlays: four of six repos are KCL libraries, and the
+  // `extensions` gate means a repo with no .k files never spawns it.
+  // `kcl-language-server` with no subcommand speaks LSP over stdio.
+  "lsp": {
+    "kcl": {
+      "command": [
+        "kcl-language-server"
+      ],
+      "extensions": [
+        ".k"
+      ]
+    }
+  },
+
+  // ── MCP servers (loop.md Phase 3; ADR-0002 bounds) ──────────────────────
+  // ADR-0002 denies GitHub MCP on token-economy grounds: a server's tool
+  // catalog is ambient per-session cost. That argument applies to every MCP
+  // server, so placement follows the catalog size and the breadth of use:
+  //
+  //   context7  — 2 tools, useful in every repo (KCL, ODCS/ODPS/OKF specs,
+  //               Docusaurus) → shared baseline.
+  //   playwright — ~25 tools, useful only for website e2e → declared in
+  //               enkinex-org-website/.opencode/opencode.jsonc, not here.
+  //
+  // No GitHub MCP (ADR-0002): PR reads stay bounded `gh --json --jq` calls.
+  // context7 works unauthenticated at basic rate limits; add an
+  // "Authorization: Bearer …" header from context7.com/dashboard if throttled.
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true
+    }
+  },
+
   // ── Permission posture (ADR-0002, allow/ask/deny) ───────────────────────
   // MATCHING: last matching rule wins. Order matters — the catch-all comes
   // first, specific allows next, and denies last so they cannot be overridden.
