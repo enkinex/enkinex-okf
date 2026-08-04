@@ -27,9 +27,23 @@ esac
 [ -n "$subject" ] || fail "empty commit message."
 
 if ! printf '%s' "$subject" | grep -Eq "^(${TYPES})(\([a-z0-9][a-z0-9-]*\))?: .+"; then
-    fail "subject must be '<type>(<scope>): <imperative>'.
+    fail "subject must be '<type>: <imperative>'.
   type must be one of: ${TYPES//|/, }
   got: $subject"
+fi
+
+# A scope is optional and names a module inside this repo. The repo name is
+# not a scope: these are separate repositories, so the repo is already implied
+# by the history the commit lands in. Package-name scopes are a monorepo
+# device and do not transfer.
+scope="$(printf '%s' "$subject" | sed -nE 's/^[a-z]+\(([^)]*)\).*/\1/p')"
+if [ -n "$scope" ]; then
+    repo="$(basename "$(git rev-parse --show-toplevel)")"
+    if [ "$scope" = "$repo" ] || [ "$scope" = "${repo#enkinex-}" ]; then
+        fail "scope '($scope)' repeats the repository name.
+  Drop it, or name the module this touches instead: '${subject%%(*}(<module>): …'
+  got: $subject"
+    fi
 fi
 
 if [ "${#subject}" -gt 72 ]; then

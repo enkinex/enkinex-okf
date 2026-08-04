@@ -60,11 +60,17 @@ configuration surfaces (Databricks Asset Bundles) as typed, modular code.
 
 ### Git workflow (locked)
 
-- Branch slug: `<type>/<scope>-<short-summary>`; `type` ∈ `feat · fix ·
-  refactor · docs · chore · test · infra · proj`.
-- Commits: Conventional Commits subset `<type>(<scope>): <imperative ≤72>`,
+- Branch slug: `<type>/<short-slug>`; `type` ∈ `feat · fix · refactor ·
+  docs · chore · test · infra · proj`; slug kebab-case, ≤6 words,
+  imperative (e.g. `feat/output-port-retry-policy`).
+- Commits: Conventional Commits subset `<type>: <imperative ≤72>`,
   `Refs:` footer pointing at the plan section delivered, no `Closes:`/
   `Fixes:`/`Resolves:` (there are no GitHub Issues).
+- **No repo-name scope.** A scope is optional and names a *module inside
+  this repo* (`catalog`, `quality`, `trust`, `githooks`), never the repo
+  itself: `feat(odcs):` inside enkinex-odcs says nothing the repository
+  does not already say. Package-name scopes are a monorepo device; these
+  are separate repos. The `commit-msg` hook rejects a redundant scope.
 - **Never push, merge, or open PRs unless the user explicitly asks.** The
   iteration ends at a local commit. `gh` CLI is the only GitHub surface
   (ADR-0002): no GitHub MCP, no Actions, no Issues/Projects/Releases.

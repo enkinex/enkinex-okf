@@ -40,7 +40,7 @@ while read -r _local_ref local_sha remote_ref remote_sha; do
 
     if ! printf '%s' "$branch" | grep -Eq "^(${TYPES})/[a-z0-9][a-z0-9-]*$"; then
         fail "branch '$branch' does not match the locked slug grammar.
-  Expected <type>/<scope>-<short-summary>, type one of: ${TYPES//|/, }"
+  Expected <type>/<short-slug> (kebab-case), type one of: ${TYPES//|/, }"
     fi
 
     # A remote head that is not an ancestor of what we are pushing means the
