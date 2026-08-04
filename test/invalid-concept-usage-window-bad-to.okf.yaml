@@ -1,0 +1,2 @@
+type: Metric
+usage_window: { from: "2026-07-01", to: "not-a-date" }

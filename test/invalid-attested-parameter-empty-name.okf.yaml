@@ -1,0 +1,4 @@
+type: Attested Computation
+runtime: dbt
+parameters:
+  - { name: "", type: integer, required: true }

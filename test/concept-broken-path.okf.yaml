@@ -1,0 +1,4 @@
+type: Reference
+resource: ../../does/not/exist.md
+sources:
+  - resource: /missing/concept.md

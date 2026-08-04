@@ -1,0 +1,4 @@
+type: Metric
+sources:
+  - resource: dashboard:revenue
+    last_modified: "07-20-2026"

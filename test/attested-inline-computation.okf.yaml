@@ -1,0 +1,4 @@
+type: Attested Computation
+runtime: postgres
+parameters:
+  - { name: account_id, type: uuid, required: true }
