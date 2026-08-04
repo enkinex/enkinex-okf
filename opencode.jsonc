@@ -57,7 +57,18 @@
   // No GitHub MCP (ADR-0002): PR reads stay bounded `gh --json --jq` calls.
   // context7 works unauthenticated at basic rate limits; add an
   // "Authorization: Bearer …" header from context7.com/dashboard if throttled.
+  // `enkinex` is the local server carrying Phase 4's three tools. Its catalog
+  // is derived from the repo it runs in — no kcl.mod means no KCL tools, no
+  // plan/ means no project_state — so an unrelated repo pays nothing.
   "mcp": {
+    "enkinex": {
+      "type": "local",
+      "command": [
+        "node",
+        ".agents/mcp/enkinex.mjs"
+      ],
+      "enabled": true
+    },
     "context7": {
       "type": "remote",
       "url": "https://mcp.context7.com/mcp",
