@@ -86,7 +86,13 @@ compliance: `commit-msg` checks the subject grammar and the `Refs:` footer,
 credentials, `pre-push` checks the branch slug and refuses direct pushes to
 `main` and history rewrites.
 
+A second layer, `.agents/policy/guard.mjs`, covers what git hooks cannot see:
+hook bypasses (`--no-verify`, `core.hooksPath` edits), `git add -A`, `gh pr
+merge`, and reads of credential paths. One script; opencode, Claude Code and
+Codex each call it through a pointer-only adapter.
+
 - **Never pass `--no-verify`.** If a hook refuses, fix the cause.
+- Stage explicit paths. `git add -A`, `git add .` and `git add -u` are denied.
 - Hooks are inert until a clone is pointed at them. If
   `git config --get core.hooksPath` is empty, run
   `git config core.hooksPath .githooks` before committing.
