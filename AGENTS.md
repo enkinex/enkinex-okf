@@ -72,6 +72,22 @@ configuration surfaces (Databricks Asset Bundles) as typed, modular code.
 - Before any repo edit: `git fetch origin`, confirm sync with `main`,
   create the branch. Commit at the end of the iteration.
 
+### Mechanical enforcement
+
+The rules above are enforced by git hooks in `.githooks/`, not by your
+compliance: `commit-msg` checks the subject grammar and the `Refs:` footer,
+`pre-commit` checks the enkinex remote and scans staged content for
+credentials, `pre-push` checks the branch slug and refuses direct pushes to
+`main` and history rewrites.
+
+- **Never pass `--no-verify`.** If a hook refuses, fix the cause.
+- Hooks are inert until a clone is pointed at them. If
+  `git config --get core.hooksPath` is empty, run
+  `git config core.hooksPath .githooks` before committing.
+- Unattended runs use the headless profile (`opencode.headless.json`), where
+  push, rebase, PR creation and PR merge are denied outright rather than
+  prompted. Launch through `scripts/opencode-headless.sh` in enkinex-aiops.
+
 ### Project lifecycle
 
 Repos plan at the root level: `plan/` (active plans; finished work moves
