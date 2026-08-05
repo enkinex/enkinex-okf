@@ -13,14 +13,22 @@ fail() {
     exit 1
 }
 
-# ── Remote guard ────────────────────────────────────────────────────────────
-# A repo with no origin is a local scratch tree and cannot leak enkinex work
-# anywhere; a repo whose origin points somewhere else is refused outright.
+# ── Remote guard (advisory here, enforced at push) ──────────────────────────
+# enkinex-odcs, enkinex-odps and enkinex-okf are public and take outside
+# contributions. A fork's origin is github.com/<contributor>/…, so BLOCKING on
+# a non-enkinex origin here would refuse every commit a forker makes — it would
+# turn a guard against agents straying into foreign repos into a wall against
+# the project's own contributors.
+#
+# The guard belongs where the risk actually is: pre-push checks the real push
+# URL, and .agents/policy/guard.mjs blocks `gh pr create` and `git push`
+# against a foreign origin. Committing locally in the wrong clone is
+# recoverable and leaks nothing, so here it only warns.
 if origin="$(git remote get-url origin 2>/dev/null)"; then
     case "$origin" in
         *github.com[:/]enkinex/*) : ;;
-        *) fail "origin is not under github.com/enkinex — refusing to commit.
-  origin: $origin" ;;
+        *) echo "enkinex pre-commit: note — origin is not under github.com/enkinex ($origin).
+  Fine in a fork. Pushing to a non-enkinex remote is blocked by pre-push." >&2 ;;
     esac
 fi
 

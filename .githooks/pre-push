@@ -20,11 +20,27 @@ fail() {
 
 remote_url="${2:-}"
 
+# Remote guard. The threat is enkinex work pushed to an unrelated repository —
+# the Phase 2 case where an agent operated in a scratch clone. A contributor's
+# FORK is not that: enkinex-odcs, enkinex-odps and enkinex-okf are public, and
+# github.com/<contributor>/enkinex-odcs is exactly where a fork's push belongs.
+# So the guard matches on the repository NAME, and only the enkinex org gets an
+# unconditional pass.
+repo_name="$(basename "$(git rev-parse --show-toplevel)")"
+remote_repo="$(basename "${remote_url%.git}")"
+
 case "$remote_url" in
     "") fail "no remote URL supplied by git." ;;
     *github.com[:/]enkinex/*) : ;;
-    *) fail "push target is not under github.com/enkinex — refusing.
-  remote: $remote_url" ;;
+    *)
+        if [ "$remote_repo" = "$repo_name" ]; then
+            echo "enkinex pre-push: pushing to a fork ($remote_url), not the enkinex remote." >&2
+        else
+            fail "push target is neither an enkinex remote nor a fork of this repo.
+  repo:   $repo_name
+  remote: $remote_url"
+        fi
+        ;;
 esac
 
 while read -r _local_ref local_sha remote_ref remote_sha; do
