@@ -44,6 +44,12 @@ freshness + lint + test, including the negative and profile suites).
 - Every new/changed field gets both a positive and a negative fixture.
 - Docstrings on every schema and field (they feed `just docs`); `check` rules
   only where the spec states a hard constraint.
+- **A field whose OKF name is a KCL keyword is escaped with `$` in code, never
+  in docstrings.** `type` is the case in the library today: declare it `$type`
+  and reference it as `$type` in `check:` blocks, test config keys, and KCL
+  snippets in docs. The `$` is not part of the name — YAML fixtures and the
+  generated reference keep the plain `type`. See CONTRIBUTING.md for the full
+  reserved-word list.
 - Track one upstream version at a time; a spec bump is its own change, with
   `spec.md` re-vendored at a new pinned commit.
 

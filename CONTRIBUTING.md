@@ -113,6 +113,42 @@ fixture that exercises it — `just test-negative` fails if any such fixture
 unexpectedly validates, so a new rule with no matching fixture is an easy
 regression to introduce silently.
 
+### Fields whose OKF name is a KCL keyword
+
+OKF names its keys without regard for KCL's grammar, and some of them collide.
+`type` is the one in the library today (`document.ConceptMetadata`,
+`document.Frontmatter`, `computation.Parameter`,
+`computation.AttestedComputationMetadata`); the full reserved list is
+`True`, `False`, `None`, `Undefined`, `import`, `as`, `rule`, `schema`,
+`mixin`, `protocol`, `check`, `for`, `assert`, `if`, `elif`, `else`, `or`,
+`and`, `not`, `in`, `is`, `lambda`, `all`, `any`, `map`, `filter`, `type`.
+
+Declare and reference such a field with KCL's `$` escape, in **code only**:
+
+```kcl
+schema Frontmatter:
+    [str]: any
+    $type: str
+
+    check:
+        $type != ""
+```
+
+The `$` is not part of the name. It never appears in serialized output, in a
+`test/*.okf.yaml` fixture, or in the generated reference — all three carry the
+plain OKF key `type`. So:
+
+- **Escape** the attribute declaration, `check:` expressions, config keys in
+  `test/*_test.k`, and KCL snippets in the README or `docs/schemas/`.
+- **Do not escape** docstrings (they document the wire name), YAML fixtures, or
+  prose that refers to the OKF spec key rather than the KCL identifier.
+
+KCL's parser currently tolerates an unescaped `type:` inside a schema body, so
+omitting the `$` compiles and the whole suite passes — which is exactly why
+this is worth stating. The tolerance is incidental, not guaranteed: `type` is a
+keyword everywhere else in the grammar, and a future parser is free to reject
+the unescaped form.
+
 ## Docstrings and generated docs
 
 Every schema and field should carry a docstring — it's the source of the

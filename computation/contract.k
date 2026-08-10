@@ -13,12 +13,12 @@ schema Parameter:
     """
     [str]: any
     name: str
-    type: str
+    $type: str
     required: bool
 
     check:
         name != ""
-        type != ""
+        $type != ""
 
 schema Executor:
     """

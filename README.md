@@ -138,11 +138,15 @@ schema you need:
 import enkinex_okf.okf
 
 concept = okf.Concept {
-    type = "Metric"
+    $type = "Metric"
     title = "Revenue"
     generated = { by = "reference_agent/gemini-2.5-pro", at = "2026-06-20T22:53:05Z" }
 }
 ```
+
+`type` is a KCL keyword, so in KCL source the attribute is written `$type` — the `$` is an escape,
+not part of the name. It never reaches the wire: `kcl run` emits `type:`, and the YAML frontmatter
+you validate with `kcl vet` uses the plain OKF key `type` exactly as the spec defines it.
 
 ### Validate frontmatter extracted from an existing concept file
 

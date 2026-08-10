@@ -1,5 +1,11 @@
 This document tracks the history and evolution of the Enkinex KCL Library for the **Open Knowledge Format (OKF) Specification**.
 
+# Unreleased
+* Fixes
+  * OKF's `type` key is a KCL keyword; it is now declared and referenced with KCL's `$` escape (`$type`) in `document.ConceptMetadata`, `document.Frontmatter`, `computation.Parameter`, `computation.AttestedComputationMetadata`, their `check:` rules, and the `test/document_test.k` config keys. The escape is source-only — serialized output, `test/*.okf.yaml` fixtures, docstrings, and the generated reference all keep the plain OKF key `type`
+* Documentation
+  * `CONTRIBUTING.md` documents the KCL reserved-word list and when the `$` escape does and does not apply; `AGENTS.md`, `README.md`, `docs/schemas/document.md`, and `docs/schemas/computation.md` updated to match
+
 # v0.2-draft - Initial v0.2 Draft
 * Schemas
   * `okf.Concept`, a root composition over `document.ConceptMetadata`
