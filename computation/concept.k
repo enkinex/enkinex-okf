@@ -20,7 +20,7 @@ schema AttestedComputationMetadata(document.ConceptMetadata):
         Deterministic-check contract.
     """
     [str]: any
-    type: "Attested Computation"
+    $type: "Attested Computation"
     runtime: str
     parameters?: [Parameter]
     computation?: str

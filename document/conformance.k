@@ -8,8 +8,8 @@ schema Frontmatter:
         Sole required non-empty field; its vocabulary remains open.
     """
     [str]: any
-    type: str
+    $type: str
 
     check:
-        type != ""
+        $type != ""
 

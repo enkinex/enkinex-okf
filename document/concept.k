@@ -34,7 +34,7 @@ schema ConceptMetadata:
         Inclusive stale boundary in YYYY-MM-DD form.
     """
     [str]: any
-    type: str
+    $type: str
     title?: str
     description?: str
     resource?: str
@@ -47,6 +47,6 @@ schema ConceptMetadata:
     stale_after?: str
 
     check:
-        type != ""
+        $type != ""
         regex.match(stale_after, common.datePattern) if stale_after
 
