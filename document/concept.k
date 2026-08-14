@@ -49,4 +49,3 @@ schema ConceptMetadata:
     check:
         $type != ""
         regex.match(stale_after, common.datePattern) if stale_after
-

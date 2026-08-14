@@ -55,4 +55,3 @@ schema Source:
         resource != ""
         usage_count >= 0 if usage_count
         regex.match(last_modified, common.datePattern) if last_modified
-

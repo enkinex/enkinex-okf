@@ -46,4 +46,3 @@ schema Attester:
     """
     [str]: any
     resource?: str
-

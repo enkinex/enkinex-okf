@@ -7,7 +7,7 @@ This guide covers everything you need to build, validate, and submit changes.
 
 ## Prerequisites
 
-- [KCL](https://www.kcl-lang.io/docs/user_docs/getting-started/install) `>= 0.12.4`
+- [KCL](https://www.kcl-lang.io/docs/user_docs/getting-started/install) `>= 0.12.8`
 - [`just`](https://github.com/casey/just), the command runner used to wrap
   every development task in this repo
 
