@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  KCL_VERSION: "0.12.4"
+  KCL_VERSION: "0.12.8"
 
 jobs:
   test:

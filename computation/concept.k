@@ -29,4 +29,3 @@ schema AttestedComputationMetadata(document.ConceptMetadata):
 
     check:
         runtime != ""
-

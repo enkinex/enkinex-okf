@@ -9,4 +9,3 @@ schema RootIndexMetadata:
     """
     [str]: any
     okf_version?: str
-
